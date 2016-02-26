@@ -40,3 +40,4 @@ disk-usage:latest
 embeddable-build-status:latest
 docker-plugin:latest
 sbt:latest
+play-framework-plugin:latest

@@ -59,9 +59,6 @@ WORKDIR $JENKINS_HOME
 COPY plugins.txt $JENKINS_SHARE/plugins.txt
 RUN /usr/local/bin/plugins $JENKINS_SHARE/plugins.txt
 
-RUN ls -la $JENKINS_SHARE/ref
+RUN mkdir -p /opt/play-1.2 && wget --progress=bar:force:noscroll  https://downloads.typesafe.com/play/1.2.7.2/play-1.2.7.2.zip -O play-1.2.zip && unzip play-1.2.zip -d /opt/play-1.2 && rm play-1.2.zip
 
-# /usr/local/bin/jenkins
-
-# "/usr/local/bin/jenkins
 ENTRYPOINT ["/usr/local/bin/jenkins"]
