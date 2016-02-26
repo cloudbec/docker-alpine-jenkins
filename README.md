@@ -13,6 +13,13 @@ Imagine a list of links here that go to other docker container repo that have re
 
 ## Plugins
 * greenballs:latest
+* token-macro:latest
+* run-condition:latest
+* envinject:latest
+* conditional-buildstep:latest
+* durable-task:latest
+* jquery:latest
+* aws-java-sdk:latest
 * copyartifact:latest
 * compress-artifacts:latest
 * copy-to-slave:latest
@@ -23,12 +30,12 @@ Imagine a list of links here that go to other docker container repo that have re
 * build-pipeline-plugin:latest
 * chef:latest
 * chef-identity:latest
-* conditional-buildstep:latest
 * credentials:latest
 * git:latest
 * gitbucket:latest
 * git-changelog:latest
 * git-client:latest
+* ghprb:latest
 * gravatar:latest
 * jenkins-multijob-plugin:latest
 * matrix-auth:latest
@@ -46,6 +53,8 @@ Imagine a list of links here that go to other docker container repo that have re
 * disk-usage:latest
 * embeddable-build-status:latest
 * docker-plugin:latest
+* sbt:latest
+* play-autotest-plugin:latest
 
 ## Ports
 * Jenkins: 8080 Container Side
