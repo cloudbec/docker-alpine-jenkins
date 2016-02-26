@@ -21,6 +21,7 @@ git:latest
 gitbucket:latest
 git-changelog:latest
 git-client:latest
+ghprb:latest
 gravatar:latest
 jenkins-multijob-plugin:latest
 matrix-auth:latest
@@ -38,3 +39,4 @@ s3:latest
 disk-usage:latest
 embeddable-build-status:latest
 docker-plugin:latest
+sbt:latest
