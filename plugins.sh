@@ -12,18 +12,34 @@ set -e
 
 REF=$JENKINS_SHARE/ref/plugins
 mkdir -p $REF
+pluginsToInstall=
 
+# enforce plugin format
 while read spec || [ -n "$spec" ]; do
     plugin=(${spec//:/ });
     [[ ${plugin[0]} =~ ^# ]] && continue
     [[ ${plugin[0]} =~ ^\s*$ ]] && continue
     [[ -z ${plugin[1]} ]] && plugin[1]="latest"
-    echo "Downloading ${plugin[0]}:${plugin[1]}"
 
-    if [ -z "$JENKINS_UC_DOWNLOAD" ]; then
-      JENKINS_UC_DOWNLOAD=$JENKINS_UC/download
-    fi
-    curl -sSL -f ${JENKINS_UC_DOWNLOAD}/plugins/${plugin[0]}/${plugin[1]}/${plugin[0]}.hpi -o $REF/${plugin[0]}.jpi
-    unzip -qqo $REF/${plugin[0]}.jpi
+    pluginsToInstall+=(${plugin[0]})
+
 done  < $1
+echo "Install these plugins : "
+echo ${pluginsToInstall[@]}
 
+if [ !  ${#pluginsToInstall[@]}  -eq 0  ] ; then
+    echo test
+    /usr/local/bin/jenkins & \
+        until
+            $(curl --output /dev/null --silent --head --fail http://127.0.0.1:8080/jnlpJars/jenkins-cli.jar);
+        do
+            printf '.';   sleep 5;
+        done && \
+            wget http://127.0.0.1:8080/jnlpJars/jenkins-cli.jar && \
+            sleep 5 && \
+            java -jar jenkins-cli.jar -s http://127.0.0.1:8080 install-plugin ${pluginsToInstall[@]}  && \
+            curl -X POST http://127.0.0.1:8080/exit && \
+            while pgrep java > /dev/null; do printf '.'; sleep 1; done && \
+            mv $JENKINS_HOME/plugins $REF
+
+fi
