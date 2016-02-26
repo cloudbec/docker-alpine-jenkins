@@ -1,4 +1,4 @@
-cloudbec/alpine-jenkins:play-1.2
+nuagebec/alpine-jenkins:play-1.2
 ================
 
 Uses the Alpine image and sets up a container with [Jenkins](http://jenkins-ci.org/) installed.
