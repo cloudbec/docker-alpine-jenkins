@@ -62,20 +62,20 @@ Imagine a list of links here that go to other docker container repo that have re
 # Usage
 
 ```
-docker run -p 8080:8080 -p 50000:50000 jenkins
+docker run -p 8080:8080 -p 50000:50000  github.com/cloudbec/docker-alpine-jenkins
 ```
 
 This will store the workspace in /var/lib/jenkins. All Jenkins data lives in there - including plugins and configuration.
 You will probably want to make that a persistent volume (recommended):
 
 ```
-docker run -p 8080:8080 -p 50000:50000 -v /your/home:/var/lib/jenkins jenkins
+docker run -p 8080:8080 -p 50000:50000 -v /your/home:/var/lib/jenkins github.com/cloudbec/docker-alpine-jenkins
 ```
 
 You can also use a volume container:
 
 ```
-docker run --name myjenkins -p 8080:8080 -p 50000:50000 -v /var/lib/jenkins jenkins
+docker run --name myjenkins -p 8080:8080 -p 50000:50000 -v /var/lib/jenkins github.com/cloudbec/docker-alpine-jenkins
 ```
 
 # Building
