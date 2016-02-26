@@ -1,4 +1,4 @@
-hearstat/alpine-jenkins
+cloudbec/alpine-jenkins
 ================
 
 Uses the Alpine image and sets up a container with [Jenkins](http://jenkins-ci.org/) installed.
@@ -62,20 +62,20 @@ Imagine a list of links here that go to other docker container repo that have re
 # Usage
 
 ```
-docker run -p 8080:8080 -p 50000:50000 jenkins
+docker run -p 8080:8080 -p 50000:50000  github.com/cloudbec/docker-alpine-jenkins
 ```
 
 This will store the workspace in /var/lib/jenkins. All Jenkins data lives in there - including plugins and configuration.
 You will probably want to make that a persistent volume (recommended):
 
 ```
-docker run -p 8080:8080 -p 50000:50000 -v /your/home:/var/lib/jenkins jenkins
+docker run -p 8080:8080 -p 50000:50000 -v /your/home:/var/lib/jenkins github.com/cloudbec/docker-alpine-jenkins
 ```
 
 You can also use a volume container:
 
 ```
-docker run --name myjenkins -p 8080:8080 -p 50000:50000 -v /var/lib/jenkins jenkins
+docker run --name myjenkins -p 8080:8080 -p 50000:50000 -v /var/lib/jenkins github.com/cloudbec/docker-alpine-jenkins
 ```
 
 # Building
@@ -83,11 +83,11 @@ docker run --name myjenkins -p 8080:8080 -p 50000:50000 -v /var/lib/jenkins jenk
 To build the image, do the following:
 
 ```
-% docker build github.com/hearstat/docker-alpinejenkins
+% docker build github.com/cloudbec/docker-alpine-jenkins
 ```
 
 A prebuilt container is available in the docker index.
 
 ```
-% docker pull hearstat/alpine-jenkins
+% docker pull github.com/cloudbec/docker-alpine-jenkins
 ```
