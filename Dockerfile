@@ -9,6 +9,7 @@ ENV JENKINS_SHARE /usr/share/jenkins
 ENV JENKINS_SLAVE_AGENT_PORT 50000
 ENV JENKINS_UC https://updates.jenkins-ci.org
 ENV COPY_REFERENCE_FILE_LOG $JENKINS_HOME/copy_reference_file.log
+ENV PLAY_VERSION 1.2.7.2
 
 RUN apk update
 RUN apk --no-cache add \
@@ -37,6 +38,9 @@ RUN curl -fL http://mirrors.jenkins-ci.org/war-stable/$JENKINS_VERSION/jenkins.w
 # Setup plugin update command
 COPY plugins.sh /usr/local/bin/plugins
 
+RUN mkdir -p /opt/play && wget --progress=bar:force:noscroll  https://downloads.typesafe.com/play/${PLAY_VERSION}/play-${PLAY_VERSION}.zip -O play-${PLAY_VERSION}.zip && unzip play-${PLAY_VERSION}.zip -d /opt/play && rm play-${PLAY_VERSION}.zip
+
+
 # Volumes
 VOLUME $JENKINS_HOME
 
@@ -59,6 +63,5 @@ WORKDIR $JENKINS_HOME
 COPY plugins.txt $JENKINS_SHARE/plugins.txt
 RUN /usr/local/bin/plugins $JENKINS_SHARE/plugins.txt
 
-RUN mkdir -p /opt/play-1.2 && wget --progress=bar:force:noscroll  https://downloads.typesafe.com/play/1.2.7.2/play-1.2.7.2.zip -O play-1.2.zip && unzip play-1.2.zip -d /opt/play-1.2 && rm play-1.2.zip
 
 ENTRYPOINT ["/usr/local/bin/jenkins"]
