@@ -59,9 +59,6 @@ WORKDIR $JENKINS_HOME
 COPY plugins.txt $JENKINS_SHARE/plugins.txt
 RUN /usr/local/bin/plugins $JENKINS_SHARE/plugins.txt
 
-RUN ls -la $JENKINS_SHARE/ref
+# RUN ls -la $JENKINS_SHARE/ref
 
-# /usr/local/bin/jenkins
-
-# "/usr/local/bin/jenkins
 ENTRYPOINT ["/usr/local/bin/jenkins"]
