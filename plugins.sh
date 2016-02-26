@@ -28,7 +28,7 @@ echo "Install these plugins : "
 echo ${pluginsToInstall[@]}
 
 if [ !  ${#pluginsToInstall[@]}  -eq 0  ] ; then
-    echo test
+
     /usr/local/bin/jenkins & \
         until
             $(curl --output /dev/null --silent --head --fail http://127.0.0.1:8080/jnlpJars/jenkins-cli.jar);
@@ -40,6 +40,6 @@ if [ !  ${#pluginsToInstall[@]}  -eq 0  ] ; then
             java -jar jenkins-cli.jar -s http://127.0.0.1:8080 install-plugin ${pluginsToInstall[@]}  && \
             curl -X POST http://127.0.0.1:8080/exit && \
             while pgrep java > /dev/null; do printf '.'; sleep 1; done && \
-            mv $JENKINS_HOME/plugins $REF
+            cp -a --remove-destination -R --update $JENKINS_HOME/plugins/. $REF/.
 
 fi
