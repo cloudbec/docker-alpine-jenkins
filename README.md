@@ -1,4 +1,4 @@
-hearstat/alpine-jenkins
+cloudbec/alpine-jenkins
 ================
 
 Uses the Alpine image and sets up a container with [Jenkins](http://jenkins-ci.org/) installed.
@@ -83,11 +83,11 @@ docker run --name myjenkins -p 8080:8080 -p 50000:50000 -v /var/lib/jenkins jenk
 To build the image, do the following:
 
 ```
-% docker build github.com/hearstat/docker-alpinejenkins
+% docker build github.com/cloudbec/docker-alpine-jenkins
 ```
 
 A prebuilt container is available in the docker index.
 
 ```
-% docker pull hearstat/alpine-jenkins
+% docker pull github.com/cloudbec/docker-alpine-jenkins
 ```
