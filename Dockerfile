@@ -1,4 +1,4 @@
-FROM cloudbec/openjdk
+FROM nuagebec/alpine-jdk
 
 MAINTAINER Michael Faille "michael@faille.io"
 
