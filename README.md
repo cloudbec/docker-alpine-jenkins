@@ -100,3 +100,14 @@ A prebuilt container is available in the docker index.
 ```
 % docker pull nuagebec/alpine-jenkins:play-1.2
 ```
+
+# Web configuration
+
+ Manage Jenkins > Configure System
+
+ JDK :
+ 1.7 JAVA_HOME=/usr/lib/jvm/java-1.7-openjdk/
+ 1.7 JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk/
+
+ Play:
+ PLAY_HOME=/opt/play/play-1.2.7.2/

@@ -22,7 +22,8 @@ RUN apk --no-cache add \
     wget \
     bash \
     fontconfig \
-    ttf-dejavu
+    ttf-dejavu \
+    python
 
 # Add jenkins user
 RUN addgroup jenkins && \
