@@ -42,3 +42,4 @@ docker-plugin:latest
 sbt:latest
 play-autotest-plugin:latest
 thinBackup:latest
+junit:latest
