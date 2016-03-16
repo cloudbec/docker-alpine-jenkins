@@ -1,4 +1,4 @@
-FROM nuagebec/alpine-jdk
+FROM nuagebec/alpine-jdk:7
 
 MAINTAINER Michael Faille "michael@faille.io"
 
@@ -9,10 +9,11 @@ ENV JENKINS_SHARE /usr/share/jenkins
 ENV JENKINS_SLAVE_AGENT_PORT 50000
 ENV JENKINS_UC https://updates.jenkins-ci.org
 ENV COPY_REFERENCE_FILE_LOG $JENKINS_HOME/copy_reference_file.log
-ENV PLAY_VERSION 1.2.7.2
+# 1.2.7.2
+# ENV PLAY_VERSION 1.2.1
+ENV JAVA_HOME /usr/lib/jvm/java-1.7-openjdk
 
-RUN apk update
-RUN apk --no-cache add \
+RUN apk --update-cache add \
     gnupg \
     tar \
     ruby \
@@ -23,7 +24,14 @@ RUN apk --no-cache add \
     bash \
     fontconfig \
     ttf-dejavu \
-    python
+    openssh-client \
+    python && \
+    apk --update-cache \
+    --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ add \
+    apache-ant && \
+    export PATH=$PATH:/usr/share/java/apache-ant/bin
+
+ENV PATH $PATH:/usr/share/java/apache-ant/bin
 
 # Add jenkins user
 RUN addgroup jenkins && \
@@ -39,7 +47,18 @@ RUN curl -fL http://mirrors.jenkins-ci.org/war-stable/$JENKINS_VERSION/jenkins.w
 # Setup plugin update command
 COPY plugins.sh /usr/local/bin/plugins
 
-RUN mkdir -p /opt/play && wget --progress=bar:force:noscroll  https://downloads.typesafe.com/play/${PLAY_VERSION}/play-${PLAY_VERSION}.zip -O play-${PLAY_VERSION}.zip && unzip play-${PLAY_VERSION}.zip -d /opt/play && rm play-${PLAY_VERSION}.zip
+RUN mkdir ~/.ssh
+
+ADD dtdns-mgmt /opt/dtdns-mgmt
+
+# Configuration de play pour Jenkins
+ADD etc/jenkins.plugins.play.PlayInstallation.xml $JENKINS_HOME/jenkins.plugins.play.PlayInstallation.xml
+# RUN mkdir -p /opt/play && \
+    # pwd && \
+    # # wget --progress=bar:force:noscroll  https://downloads.typesafe.com/releases/play-${PLAY_VERSION}.zip -O play-${PLAY_VERSION}.zip && \
+    # unzip play-${PLAY_VERSION}.zip -d /opt/play && \
+    # chown -R jenkins /opt/play && \
+    # rm play-${PLAY_VERSION}.zip
 
 
 # Volumes
