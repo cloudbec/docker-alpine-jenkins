@@ -43,3 +43,4 @@ sbt:latest
 play-autotest-plugin:latest
 thinBackup:latest
 junit:latest
+test-results-analyzer:latest
