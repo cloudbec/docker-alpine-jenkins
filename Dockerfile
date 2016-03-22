@@ -3,7 +3,7 @@ FROM nuagebec/alpine-jdk:7
 MAINTAINER Michael Faille "michael@faille.io"
 
 # Environment Variables
-ENV JENKINS_VERSION 1.642.2
+ENV JENKINS_VERSION 1.642.3
 ENV JENKINS_HOME /var/lib/jenkins
 ENV JENKINS_SHARE /usr/share/jenkins
 ENV JENKINS_SLAVE_AGENT_PORT 50000
@@ -48,18 +48,6 @@ RUN curl -fL http://mirrors.jenkins-ci.org/war-stable/$JENKINS_VERSION/jenkins.w
 COPY plugins.sh /usr/local/bin/plugins
 
 RUN mkdir ~/.ssh
-
-ADD dtdns-mgmt /opt/dtdns-mgmt
-
-# Configuration de play pour Jenkins
-ADD etc/jenkins.plugins.play.PlayInstallation.xml $JENKINS_HOME/jenkins.plugins.play.PlayInstallation.xml
-# RUN mkdir -p /opt/play && \
-    # pwd && \
-    # # wget --progress=bar:force:noscroll  https://downloads.typesafe.com/releases/play-${PLAY_VERSION}.zip -O play-${PLAY_VERSION}.zip && \
-    # unzip play-${PLAY_VERSION}.zip -d /opt/play && \
-    # chown -R jenkins /opt/play && \
-    # rm play-${PLAY_VERSION}.zip
-
 
 # Volumes
 VOLUME $JENKINS_HOME
